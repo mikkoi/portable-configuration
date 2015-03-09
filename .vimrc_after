@@ -1,0 +1,218 @@
+        set nocompatible | filetype indent plugin on | syn on
+
+        fun! EnsureVamIsOnDisk(plugin_root_dir)
+          " windows users may want to use http://mawercer.de/~marc/vam/index.php
+          " to fetch VAM, VAM-known-repositories and the listed plugins
+          " without having to install curl, 7-zip and git tools first
+          " -> BUG [4] (git-less installation)
+          let vam_autoload_dir = a:plugin_root_dir.'/vim-addon-manager/autoload'
+          if isdirectory(vam_autoload_dir)
+            return 1
+          else
+            if 1 == confirm("Clone VAM into ".a:plugin_root_dir."?","&Y\n&N")
+              " I'm sorry having to add this reminder. Eventually it'll pay off.
+              call confirm("Remind yourself that most plugins ship with ".
+                          \"documentation (README*, doc/*.txt). It is your ".
+                          \"first source of knowledge. If you can't find ".
+                          \"the info you're looking for in reasonable ".
+                          \"time ask maintainers to improve documentation")
+              call mkdir(a:plugin_root_dir, 'p')
+              execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '.
+                          \       shellescape(a:plugin_root_dir, 1).'/vim-addon-manager'
+              " VAM runs helptags automatically when you install or update 
+              " plugins
+              exec 'helptags '.fnameescape(a:plugin_root_dir.'/vim-addon-manager/doc')
+            endif
+            return isdirectory(vam_autoload_dir)
+          endif
+        endfun
+
+        fun! SetupVAM()
+          " Set advanced options like this:
+          " let g:vim_addon_manager = {}
+          " let g:vim_addon_manager.key = value
+          "     Pipe all output into a buffer which gets written to disk
+          " let g:vim_addon_manager.log_to_buf =1
+
+          " Example: drop git sources unless git is in PATH. Same plugins can
+          " be installed from www.vim.org. Lookup MergeSources to get more control
+          " let g:vim_addon_manager.drop_git_sources = !executable('git')
+          " let g:vim_addon_manager.debug_activation = 1
+
+          " VAM install location:
+          let c = get(g:, 'vim_addon_manager', {})
+          let g:vim_addon_manager = c
+          let c.plugin_root_dir = expand('$HOME/.vim/vim-addons', 1)
+          if !EnsureVamIsOnDisk(c.plugin_root_dir)
+            echohl ErrorMsg | echomsg "No VAM found!" | echohl NONE
+            return
+          endif
+          let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
+
+          " Tell VAM which plugins to fetch & load:
+          call vam#ActivateAddons([], {'auto_install' : 0})
+          " sample: call vam#ActivateAddons(['pluginA','pluginB', ...], {'auto_install' : 0})
+          " Also See "plugins-per-line" below
+
+          " Addons are put into plugin_root_dir/plugin-name directory
+          " unless those directories exist. Then they are activated.
+          " Activating means adding addon dirs to rtp and do some additional
+          " magic
+
+          " How to find addon names?
+          " - look up source from pool
+          " - (<c-x><c-p> complete plugin names):
+          " You can use name rewritings to point to sources:
+          "    ..ActivateAddons(["github:foo", .. => github://foo/vim-addon-foo
+          "    ..ActivateAddons(["github:user/repo", .. => github://user/repo
+          " Also see section "2.2. names of addons and addon sources" in VAM's documentation
+        endfun
+        call SetupVAM()
+        " experimental [E1]: load plugins lazily depending on filetype, See
+        " NOTES
+        " experimental [E2]: run after gui has been started (gvim) [3]
+        " option1:  au VimEnter * call SetupVAM()
+        " option2:  au GUIEnter * call SetupVAM()
+        " See BUGS sections below [*]
+        " Vim 7.0 users see BUGS section [3]
+
+
+
+
+set exrc
+set secure
+
+syntax on
+set number
+
+set statusline=%m%<%F%h%r%h%w%y\ %{&ff}\ %=\ col:%c%V\ ascii:%b\ pos:%o\ line:%l\/%L\ %P
+set laststatus=2
+set backspace=2
+
+"set tabstop=3
+"set expandtab
+"set shiftwidth=3
+set autoindent
+set smartindent
+set cindent
+
+set pastetoggle=<f5>
+
+set wildmode=longest,list,full
+set wildmenu
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=yellow
+
+"set foldlevelstart=20 
+"Maybe with VimFold4C
+
+
+   
+"let &path.="/home/mikko/emediate/eas.bo,~/emediate/eas/booking,/usr/include/AL,"
+
+
+" Save by F3 in insert mode.
+inoremap <F3> <c-o>:w<cr>
+
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+
+call vam#ActivateAddons(['local_vimrc'], {'auto_install' : 0})
+
+"call vam#ActivateAddons(['YouCompleteMe'], {'auto_install' : 0})
+
+" SYNTACTIC
+" call vam#ActivateAddons(['Syntastic'], {'auto_install' : 0})
+let g:syntastic_c_checkers = ['cppcheck','gcc']
+
+let g:syntastic_c_cppcheck_args = "--language=c --std=c99 --enable=warning,style,performance,portability,information"
+
+let g:syntastic_cpp_checkers = ['cppcheck','gcc']
+
+let g:syntastic_cpp_cppcheck_args = "--language=c++ --std=c++03 --enable=warning,style,performance,portability,information -I/home/mikko/emediate/eas"
+
+"In order to check header files add this to your .vimrc:
+let g:syntastic_cpp_check_header = 1
+
+"To disable the search of included header files after special libraries like gtk and glib add this line to your .vimrc:
+let g:syntastic_cpp_no_include_search = 1
+
+"To disable the include of the default include dirs (such as /usr/include) add this line to your .vimrc:
+"let g:syntastic_cpp_no_default_include_dirs = 1
+
+"To enable header files being re-checked on every file write add the following line to your .vimrc. Otherwise the header files are checked only one time on initially loading the file. In order to force syntastic to refresh the header includes simply unlet b:syntastic_cpp_includes. Then the header files are being re-checked on the next file write.
+let g:syntastic_cpp_auto_refresh_includes = 1
+
+"Alternatively you can set the buffer local variable b:syntastic_cpp_cflags. If this variable is set for the current buffer no search for additional libraries is done. I.e. set the variable like this:
+"let b:syntastic_cpp_cflags = '-I/usr/include/libsoup-2.4'
+
+"In order to add some custom include directories that should be added to the gcc command line you can add those to the global variable g:syntastic_cpp_include_dirs. This list can be used like this:
+"let g:syntastic_cpp_include_dirs = [ 'includes', 'headers' ]
+
+"Moreover it is possible to add additional compiler options to the syntax checking execution via the variable g:syntastic_cpp_compiler_options:
+"let g:syntastic_cpp_compiler_options = '-std=c++0x'
+
+"Additionally the setting g:syntastic_cpp_config_file allows you to define a file that contains additional compiler arguments like include directories or CFLAGS. The file is expected to contain one option per line. If no filename is given, it defaults to .syntastic_cpp_config:
+"let g:syntastic_cpp_config_file = '.config'
+let g:syntastic_cpp_config_file = '/home/mikko/emediate/.syntastic_c_config'
+let g:syntastic_c_config_file = '/home/mikko/emediate/.syntastic_c_config'
+
+"Using the global variable g:syntastic_cpp_remove_include_errors you can specify whether errors of files included via the g:syntastic_cpp_include_dirs setting are removed from the result set:
+"let g:syntastic_cpp_remove_include_errors = 1
+
+"Use the variable g:syntastic_cpp_errorformat to override the default error format:
+"let g:syntastic_cpp_errorformat = '%f:%l:%c: %trror: %m'
+
+"Set your compiler executable with e.g. (defaults to g++, or clang++ if g++ is not found)
+"let g:syntastic_cpp_compiler = 'clang++'
+
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+
+" LH-CPP ETC.
+"call vam#ActivateAddons(['lh-cpp'], {'auto_install' : 0})
+"call vam#ActivateAddons(['build-tools-wrapper'], {'auto_install' : 0})
+"https://code.google.com/p/lh-vim/wiki/BTW
+
+
+" Nerd Commenter
+" call vam#ActivateAddons(['nerdcommenter'], {'auto_install' : 0})
+
+" TComment
+call vam#ActivateAddons(['github:tomtom/tcomment_vim'], {'auto_install' : 0})
+
+" CMake.vim
+" call vam#ActivateAddons(['github:jalcine/cmake.vim'], {'auto_install' : 0})
+
+" Another CMake with file list bar
+"call vam#ActivateAddons(['vim-cmake-project'], {'auto_install' : 0})
+
+" Rename a file in the current directory
+call vam#ActivateAddons(['Rename2'], {'auto_install' : 0})
+
+" Keep case when replacing
+call vam#ActivateAddons(['github:Chiel92/vim-autoformat'], {'auto_install' : 0})
+
+" Keep case when replacing
+call vam#ActivateAddons(['keepcase'], {'auto_install' : 0})
+
+call vam#ActivateAddons(['github:altercation/vim-colors-solarized'], {'auto_install' : 0})
+syntax enable
+if has('gui_running')
+	set background=light
+	colorscheme solarized
+else
+	set background=light
+	set t_Co=16
+	colorscheme solarized
+endif
+

@@ -1,0 +1,3 @@
+
+source ~/imported_configuration/configuration/.vimrc_after
+
