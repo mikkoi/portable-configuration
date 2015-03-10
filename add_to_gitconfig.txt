@@ -1,0 +1,2 @@
+[include]
+    path = portable-configuration/.gitconfig

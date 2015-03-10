@@ -116,6 +116,9 @@ fi
 #eval `ssh-agent -s`
 eval `/usr/bin/keychain --eval id_rsa`
 
+BASH_PROFILE_EXECUTED=1
 # Read in bashrc.
-[[ -r ~/.bashrc ]] && . ~/.bashrc
+[[ -r ~/.bashrc ]] && source ~/.bashrc
+
+echo "Finished executing portable bash_profile"
 
