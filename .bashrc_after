@@ -113,11 +113,11 @@ if ! shopt -oq posix; then
 fi
 
 # autojump
-[[ -s /home/mikko/.autojump/etc/profile.d/autojump.sh ]] && source /home/mikko/.autojump/etc/profile.d/autojump.sh
+# [[ -s /home/mikko/.autojump/etc/profile.d/autojump.sh ]] && source /home/mikko/.autojump/etc/profile.d/autojump.sh
 
 # vimpager and vimcat
-alias less=$PAGER
-alias zless=$PAGER
+#alias less=$PAGER
+#alias zless=$PAGER
 
 
 BLACK="\[\033[0;30m\]"
@@ -151,23 +151,31 @@ export PROMPT_COMMAND='RET=$?;\
    PS1="$GREEN\u@\h $BLUE\w $CYAN$BRANCH$RED$ERRMSG \$ $BLACK";'
 
 # Solarized colours for command ls, etc.
-eval `dircolors ~/other/github/dircolors-solarized/dircolors.ansi-light`
+
+if [ -f ${HOME}/other/github/dircolors-solarized/dircolors.ansi-light ]; then
+  eval `dircolors ${HOME}/other/github/dircolors-solarized/dircolors.ansi-light`
+else
+  mkdir -p ${HOME}/other/github
+  git clone https://github.com/seebi/dircolors-solarized ${HOME}/other/github/dircolors-solarized
+  eval `dircolors ${HOME}/other/github/dircolors-solarized/dircolors.ansi-light`
+fi
 
 # Emediate trunk
 export EMEDIATE_TRUNK_PATH="/home/mikko/emediate/trunk"
 
-export PATH=${PATH}:~/other/github/ninja
-export PATH=${PATH}:~/other/github/cppcheck
+(command -v ${HOME}/other/github/ninja/ninja >/dev/null 2>&1 && export PATH=${PATH}:~/other/github/ninja)
+    || { echo >&2 "I require ninja but it's not installed."; }
+#export PATH=${PATH}:~/other/github/cppcheck
 
 # JAVA paths
-export JAVA_HOME="${HOME}/jdk1.7.0_65"
-export PATH="$JAVA_HOME/bin:$PATH"
+#export JAVA_HOME="${HOME}/jdk1.7.0_65"
+#export PATH="$JAVA_HOME/bin:$PATH"
 
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
+(command -v ${HOME}/.anyenv/bin/anyenv && export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)")
+    || { echo >&2 "I require anyenv but it's not installed."; }
 
 # vimpager and vimcat
-export PAGER=/usr/local/bin/vimpager
+#export PAGER=/usr/local/bin/vimpager
 
 alias githist="git hist | head -20"
 

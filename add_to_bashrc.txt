@@ -1,3 +1,3 @@
 
-source ${HOME}/imported_configuration/configuration/.bashrc
+source ${HOME}/portable-configuration/.bashrc_after
 
