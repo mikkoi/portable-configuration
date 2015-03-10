@@ -17,6 +17,7 @@ set smartindent
 set cindent
 
 
+
 " SYNTAX CHECK
 call vam#ActivateAddons(['Syntastic'], {'force_loading_plugins_now': 1})
 
