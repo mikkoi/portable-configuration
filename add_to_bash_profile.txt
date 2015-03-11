@@ -1,3 +1,4 @@
 
+BASH_PROFILE_EXECUTED=1
 source ${HOME}/portable-configuration/.bash_profile_after
 

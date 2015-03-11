@@ -8,7 +8,11 @@ case $- in
       *) return;;
 esac
 
-echo "Entering ~/.bash_profile"
+echo "Entering portable-configuration/.bash_profile_after"
+
+if [ -d ${HOME}/bin ]; then
+    PATH=${HOME}/bin:${PATH}
+fi
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -116,9 +120,9 @@ fi
 #eval `ssh-agent -s`
 eval `/usr/bin/keychain --eval id_rsa`
 
-BASH_PROFILE_EXECUTED=1
+BASH_PROFILE_PORTABLE_EXECUTED=1
 # Read in bashrc.
-[[ -r ~/.bashrc ]] && source ~/.bashrc
+[[ "${BASHRC_EXECUTED}" == "" && -r ${HOME}/.bashrc ]] && source ${HOME}/.bashrc
 
-echo "Finished executing portable bash_profile"
+echo "Exiting portable-configuration/.bash_profile_after"
 

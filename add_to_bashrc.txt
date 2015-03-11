@@ -1,3 +1,4 @@
 
+BASHRC_EXECUTED=1
 source ${HOME}/portable-configuration/.bashrc_after
 
