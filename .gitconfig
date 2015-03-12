@@ -1,14 +1,15 @@
 [user]
-	name = mikko
-	email = mikko@cxense.com
+    name = mikko
+    email = mikko@cxense.com
 [core]
-   autocrlf = input
-   safecrlf = true
+    autocrlf = input
+    safecrlf = true
+    editor = vim
 [alias]
-   co = checkout
-	st = status
-	br = branch --all --verbose --verbose
-	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-   re = remote --verbose --verbose
-	type = cat-file -t
-	dump = cat-file -p
+    co = checkout
+    st = status
+    br = branch --all --verbose --verbose
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    re = remote --verbose --verbose
+    type = cat-file -t
+    dump = cat-file -p
