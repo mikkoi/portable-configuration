@@ -137,14 +137,17 @@ fi
 # Emediate trunk
 export EMEDIATE_TRUNK_PATH="/home/mikko/emediate/trunk"
 
-(command -v ${HOME}/other/github/ninja/ninja >/dev/null 2>&1 && export PATH=${PATH}:~/other/github/ninja) || { echo >&2 "I require ninja but it's not installed."; }
+#(command -v ${HOME}/other/github/ninja/ninja >/dev/null 2>&1 && export PATH=${PATH}:~/other/github/ninja) || { echo >&2 "I require ninja but it's not installed."; }
+(command -v ninja >/dev/null 2>&1 && export PATH=${PATH}:~/other/github/ninja) || { echo >&2 "I require ninja but it's not installed."; }
 #export PATH=${PATH}:~/other/github/cppcheck
 
 # JAVA paths
 #export JAVA_HOME="${HOME}/jdk1.7.0_65"
 #export PATH="$JAVA_HOME/bin:$PATH"
 
-(command -v ${HOME}/.anyenv/bin/anyenv && export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)") || { echo >&2 "I require anyenv but it's not installed."; }
+#(command -v ${HOME}/.anyenv/bin/anyenv && export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)") || { echo >&2 "I require ninja but it's not installed."; }
+(command -v ${HOME}/.anyenv/bin/anyenv >/dev/null 2>&1 ) || { git clone https://github.com/riywo/anyenv ~/.anyenv; }
+export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)"
 
 # vimpager and vimcat
 #export PAGER=/usr/local/bin/vimpager
