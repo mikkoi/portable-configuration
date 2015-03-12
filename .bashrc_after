@@ -149,6 +149,8 @@ export EMEDIATE_TRUNK_PATH="/home/mikko/emediate/trunk"
 (command -v ${HOME}/.anyenv/bin/anyenv >/dev/null 2>&1 ) || { git clone https://github.com/riywo/anyenv ~/.anyenv; }
 export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)"
 
+( command -v curl >/dev/null 2>&1 ) || { echo >&2 "Please install curl."; }
+
 # vimpager and vimcat
 #export PAGER=/usr/local/bin/vimpager
 
