@@ -10,7 +10,7 @@ esac
 
 echo "Entering portable-configuration/.bashrc_after"
 
-# Read in bashrc. TODO make circular references impossible with variables.
+# Read in bashrc.
 [[ "${BASH_PROFILE_PORTABLE_EXECUTED}" == "" && -r ~/.bash_profile ]] && . ~/.bash_profile
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -122,6 +122,10 @@ fi
 #alias less=$PAGER
 #alias zless=$PAGER
 
+if [ ! -d ${HOME}/other/github ]; then
+  mkdir -p ${HOME}/other/github
+fi
+
 source ${HOME}/portable-configuration/git-dir-colors.sh
 
 # Solarized colours for command ls, etc.
@@ -145,7 +149,6 @@ export EMEDIATE_TRUNK_PATH="/home/mikko/emediate/trunk"
 #export JAVA_HOME="${HOME}/jdk1.7.0_65"
 #export PATH="$JAVA_HOME/bin:$PATH"
 
-#(command -v ${HOME}/.anyenv/bin/anyenv && export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)") || { echo >&2 "I require ninja but it's not installed."; }
 (command -v ${HOME}/.anyenv/bin/anyenv >/dev/null 2>&1 ) || { git clone https://github.com/riywo/anyenv ~/.anyenv; }
 export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)"
 
