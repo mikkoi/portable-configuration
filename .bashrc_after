@@ -138,9 +138,6 @@ else
   eval `dircolors ${HOME}/other/github/dircolors-solarized/dircolors.ansi-light`
 fi
 
-# Emediate trunk
-export EMEDIATE_TRUNK_PATH="/home/mikko/emediate/trunk"
-
 #(command -v ${HOME}/other/github/ninja/ninja >/dev/null 2>&1 && export PATH=${PATH}:~/other/github/ninja) || { echo >&2 "I require ninja but it's not installed."; }
 (command -v ninja >/dev/null 2>&1 && export PATH=${PATH}:~/other/github/ninja) || { echo >&2 "I require ninja but it's not installed."; }
 #export PATH=${PATH}:~/other/github/cppcheck
