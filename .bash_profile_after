@@ -22,6 +22,11 @@ if [ -d ~/lib ]; then
     export LD_LIBRARY_PATH="${HOME}/lib${LD_LIBRARY_PATH:+:}${LD_LIBRARY_PATH}"
 fi
 
+# Other local bins
+if [ -d ~/.cabal/bin ]; then # Cabal:Haskell's package manager. e.g. Shellcheck!
+    export PATH="${HOME}/.cabal/bin${PATH:+:}${PATH}"
+fi
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
