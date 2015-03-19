@@ -131,7 +131,7 @@ fi
 
 # Set ssh-agent
 #eval `ssh-agent -s`
-eval `/usr/bin/keychain --eval id_rsa id_dsa`
+eval `/usr/bin/keychain --eval id_rsa`
 
 BASH_PROFILE_PORTABLE_EXECUTED=1
 # Read in bashrc.

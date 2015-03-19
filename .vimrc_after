@@ -132,15 +132,29 @@ call vam#ActivateAddons(['github:tomtom/tcomment_vim'], {'auto_install' : 0})
 " CMake.vim
 " call vam#ActivateAddons(['github:jalcine/cmake.vim'], {'auto_install' : 0})
 
-" Another CMake with file list bar
-"call vam#ActivateAddons(['vim-cmake-project'], {'auto_install' : 0})
+"Another CMake with file list bar
+" call vam#ActivateAddons(['vim-cmake-project'], {'auto_install' : 0})
 
-" Rename a file in the current directory
+"Rename a file in the current directory
 call vam#ActivateAddons(['Rename2'], {'auto_install' : 0})
 
-" Format your code with only one button press! This plugin makes use of
-" external formatprograms to achieve the best result.
+"Save a file and create its parent directories at the same time
+call vam#ActivateAddons(['github:duggiefresh/vim-easydir'], {'auto_install' : 0})
+
+"vim-signature is a plugin to place, toggle and display marks.
+call vam#ActivateAddons(['github:kshenoy/vim-signature'], {'auto_install' : 0})
+
+"Format your code with only one button press! This plugin makes use of
+"external formatprograms to achieve the best result.
 call vam#ActivateAddons(['github:Chiel92/vim-autoformat'], {'auto_install' : 0})
+
+"Polyglot, many programming languages supported automatically
+call vam#ActivateAddons(['github:sheerun/vim-polyglot'], {'auto_install' : 0})
+
+"Vim Git interface
+call vam#ActivateAddons(['github:tpope/vim-fugitive'], {'auto_install' : 0})
+
+
 
 " Keep case when replacing
 call vam#ActivateAddons(['keepcase'], {'auto_install' : 0})
@@ -156,18 +170,23 @@ else
 	colorscheme solarized
 endif
 
-" SYNTASTIC
+"SYNTASTIC
 " call vam#ActivateAddons(['Syntastic'], {'force_loading_plugins_now': 1})
 call vam#ActivateAddons(['Syntastic'], {'auto_install' : 0})
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
+"Enable this option to tell syntastic to always stick any detected errors into the |location-list|: >
+let g:syntastic_always_populate_loc_list = 1
+"Use this option to tell syntastic to automatically open and/or close the |location-list| (see |syntastic-error-window|).
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
+"Use this option to tell syntastic whether to use the |:sign| interface to mark syntax errors: >
+let g:syntastic_enable_signs=1
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
 
-" SYNTASTIC Vim checker
+"SYNTASTIC Vim checker
 call vam#ActivateAddons(['github:todesking/vint-syntastic'], {'auto_install' : 0})
 " you need: sudo pip install vim-vint
 let g:syntastic_vim_vint_args = '--style-problem --color --style'
@@ -177,6 +196,9 @@ call vam#ActivateAddons(['github:syngan/vim-vimlint'], {'auto_install' : 0})
 
 let g:syntastic_vim_checkers = ['vimlint','vint']
 " let g:syntastic_vim_checkers = ['vimlint']
+
+" SYNTASTIC Perl checker
+" TODO
 
 
 "  Read file _vimrc_local.vim if present.

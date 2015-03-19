@@ -122,32 +122,34 @@ fi
 #alias less=$PAGER
 #alias zless=$PAGER
 
-if [ ! -d ${HOME}/other/github ]; then
-  mkdir -p ${HOME}/other/github
+if [ ! -d "${HOME}/other/github" ]; then
+  mkdir -p "${HOME}/other/github"
 fi
 
-source ${HOME}/portable-configuration/git-dir-colors.sh
+source "${HOME}/portable-configuration/git-dir-colors.sh"
 
 # Solarized colours for command ls, etc.
 
-if [ -f ${HOME}/other/github/dircolors-solarized/dircolors.ansi-light ]; then
-  eval `dircolors ${HOME}/other/github/dircolors-solarized/dircolors.ansi-light`
+if [ -f "${HOME}/other/github/dircolors-solarized/dircolors.ansi-light" ]; then
+   eval "$(dircolors "${HOME}/other/github/dircolors-solarized/dircolors.ansi-light")"
 else
-  mkdir -p ${HOME}/other/github
-  git clone https://github.com/seebi/dircolors-solarized ${HOME}/other/github/dircolors-solarized
-  eval `dircolors ${HOME}/other/github/dircolors-solarized/dircolors.ansi-light`
+  mkdir -p "${HOME}/other/github"
+  git clone https://github.com/seebi/dircolors-solarized "${HOME}/other/github/dircolors-solarized"
+  eval "$(dircolors "${HOME}/other/github/dircolors-solarized/dircolors.ansi-light")"
 fi
 
 #(command -v ${HOME}/other/github/ninja/ninja >/dev/null 2>&1 && export PATH=${PATH}:~/other/github/ninja) || { echo >&2 "I require ninja but it's not installed."; }
-(command -v ninja >/dev/null 2>&1 && export PATH=${PATH}:~/other/github/ninja) || { echo >&2 "I require ninja but it's not installed."; }
+command -v ninja >/dev/null 2>&1 || { echo >&2 "I require ninja but it's not installed."; }
 #export PATH=${PATH}:~/other/github/cppcheck
 
 # JAVA paths
 #export JAVA_HOME="${HOME}/jdk1.7.0_65"
 #export PATH="$JAVA_HOME/bin:$PATH"
 
-(command -v ${HOME}/.anyenv/bin/anyenv >/dev/null 2>&1 ) || { git clone https://github.com/riywo/anyenv ~/.anyenv; }
+(command -v "${HOME}/.anyenv/bin/anyenv" >/dev/null 2>&1 ) || { git clone https://github.com/riywo/anyenv "${HOME}/.anyenv"; }
 export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)"
+
+(command -v vimcat >/dev/null 2>&1 ) || { cd "${HOME}/other/github/vimpager"; git clone https://github.com/rkitover/vimpager.git; cd vimpager; make PREFIX="${HOME}" install; }
 
 ( command -v curl >/dev/null 2>&1 ) || { echo >&2 "Please install curl."; }
 
@@ -156,6 +158,7 @@ export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)"
 
 alias githist="git hist | head -20"
 
+# shellcheck disable=SC2034
 BASHRC_PORTABLE_EXECUTED=1
 echo "Exiting portable-configuration/.bashrc_after"
 
