@@ -118,10 +118,6 @@ fi
 # autojump
 # [[ -s /home/mikko/.autojump/etc/profile.d/autojump.sh ]] && source /home/mikko/.autojump/etc/profile.d/autojump.sh
 
-# vimpager and vimcat
-#alias less=$PAGER
-#alias zless=$PAGER
-
 if [ ! -d "${HOME}/other/github" ]; then
   mkdir -p "${HOME}/other/github"
 fi
@@ -138,8 +134,8 @@ else
   eval "$(dircolors "${HOME}/other/github/dircolors-solarized/dircolors.ansi-light")"
 fi
 
-#(command -v ${HOME}/other/github/ninja/ninja >/dev/null 2>&1 && export PATH=${PATH}:~/other/github/ninja) || { echo >&2 "I require ninja but it's not installed."; }
-command -v ninja >/dev/null 2>&1 || { echo >&2 "I require ninja but it's not installed."; }
+#(command -v ${HOME}/other/github/ninja/ninja >/dev/null 2>&1 && export PATH=${PATH}:~/other/github/ninja) || { echo >&2 "ninja is not installed. Maybe it is not needed."; }
+command -v ninja >/dev/null 2>&1 || { echo >&2 "ninja is not installed. Maybe it is not needed."; }
 #export PATH=${PATH}:~/other/github/cppcheck
 
 # JAVA paths
@@ -155,6 +151,9 @@ export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)"
 
 # vimpager and vimcat
 #export PAGER=/usr/local/bin/vimpager
+# vimpager and vimcat
+#alias less=$PAGER
+#alias zless=$PAGER
 
 alias githist="git hist | head -20"
 

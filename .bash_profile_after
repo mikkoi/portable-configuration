@@ -133,6 +133,7 @@ fi
 #eval `ssh-agent -s`
 eval `/usr/bin/keychain --eval id_rsa`
 
+# shellcheck disable=SC2034
 BASH_PROFILE_PORTABLE_EXECUTED=1
 # Read in bashrc.
 [[ "${BASHRC_EXECUTED}" == "" && -r ${HOME}/.bashrc ]] && source ${HOME}/.bashrc
