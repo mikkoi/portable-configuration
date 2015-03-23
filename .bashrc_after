@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -48,7 +49,8 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+# force_color_prompt = (yes || undef)
+force_color_prompt=
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -79,7 +81,7 @@ esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+   (test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)") || eval "$(dircolors -b)"
     alias ls='ls --color=auto --human-readable --classify'
     alias ll='ls --color=auto --almost-all -l --author -t --reverse --human-readable --classify'
     #alias dir='dir --color=auto'
@@ -142,8 +144,12 @@ command -v ninja >/dev/null 2>&1 || { echo >&2 "ninja is not installed. Maybe it
 #export JAVA_HOME="${HOME}/jdk1.7.0_65"
 #export PATH="$JAVA_HOME/bin:$PATH"
 
+# We need anyenv (for plenv, really, also for pyenv).
 (command -v "${HOME}/.anyenv/bin/anyenv" >/dev/null 2>&1 ) || { git clone https://github.com/riywo/anyenv "${HOME}/.anyenv"; }
 export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)"
+# So we need plenv, and one plugin for local::lib installation.
+(command -v plenv >/dev/null 2>&1 ) || { anyenv install plenv; }
+(test -r "${HOME}/.anyenv/envs/plenv/plugins/plenv-contrib/" ) || { git clone git://github.com/miyagawa/plenv-contrib.git "${HOME}/.anyenv/envs/plenv/plugins/plenv-contrib/"; }
 
 (command -v vimcat >/dev/null 2>&1 ) || { cd "${HOME}/other/github/vimpager"; git clone https://github.com/rkitover/vimpager.git; cd vimpager; make PREFIX="${HOME}" install; }
 
