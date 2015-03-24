@@ -200,7 +200,8 @@ let g:syntastic_vim_checkers = ['vimlint','vint']
 " SYNTASTIC Perl checker
 " TODO
 let g:syntastic_enable_perl_checker = 1
-let g:syntastic_perl_checkers = ['perl', 'perlcritic']
+let g:syntastic_perl_checkers = [ 'perl', 'perlcritic' ]
+let g:syntastic_perl_lib_path = [ './lib', './lib/auto', '/home/mikko/perl5/lib/perl5' ]
 
 "  Read file _vimrc_local.vim if present.
 call vam#ActivateAddons(['github:vim-scripts/local_vimrc.vim'], {'auto_install' : 0})
