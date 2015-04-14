@@ -1,4 +1,4 @@
 
-BASHRC_EXECUTED=1
-source ${HOME}/portable-configuration/.bashrc_after
+BASHRC_EXECUTED=1; export BASHRC_EXECUTED
+source "${HOME}/portable-configuration/.bashrc_after"
 

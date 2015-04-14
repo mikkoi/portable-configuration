@@ -11,14 +11,14 @@ esac
 echo "Entering portable-configuration/.bash_profile_after"
 
 # set PATH so it includes user's private bin if it exists
-if [ -d ${HOME}/bin ]; then
+if [ -d "${HOME}/bin" ]; then
     export PATH="${HOME}/bin${PATH:+:}${PATH}"
 fi
 # do the same with MANPATH and LD_LIBRARY_PATH
-if [ -d ~/man ]; then
+if [ -d "${HOME}/man" ]; then
     export MANPATH="${HOME}/man${MANPATH:+:}${MANPATH}"
 fi
-if [ -d ~/lib ]; then
+if [ -d "${HOME}/lib" ]; then
     export LD_LIBRARY_PATH="${HOME}/lib${LD_LIBRARY_PATH:+:}${LD_LIBRARY_PATH}"
 fi
 
@@ -93,7 +93,7 @@ esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+   (test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)") || eval "$(dircolors -b)"
     alias ls='ls --color=auto --almost-all'
     alias ll='ls --color=auto --almost-all -l --author -t --reverse'
 fi
@@ -119,15 +119,15 @@ if ! shopt -oq posix; then
 fi
 
 # Set ssh-agent
-eval `/usr/bin/keychain --eval`
+eval "$(/usr/bin/keychain --eval id_rsa)"
 if ! xset q &>/dev/null; then
    ssh-add
 fi
 
 # shellcheck disable=SC2034
-BASH_PROFILE_PORTABLE_EXECUTED=1
+BASH_PROFILE_PORTABLE_EXECUTED=1 #; export BASH_PROFILE_PORTABLE_EXECUTED
 # Read in bashrc.
-[[ "${BASHRC_EXECUTED}" == "" && -r ${HOME}/.bashrc ]] && source ${HOME}/.bashrc
+[[ "${BASHRC_EXECUTED}" == "" && -r "${HOME}/.bashrc" ]] && source "${HOME}/.bashrc"
 
 echo "Exiting portable-configuration/.bash_profile_after"
 

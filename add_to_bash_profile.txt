@@ -1,4 +1,4 @@
 
-BASH_PROFILE_EXECUTED=1
-source ${HOME}/portable-configuration/.bash_profile_after
+BASH_PROFILE_EXECUTED=1; export BASH_PROFILE_EXECUTED
+source "${HOME}/portable-configuration/.bash_profile_after"
 
