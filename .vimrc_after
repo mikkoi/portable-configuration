@@ -1,5 +1,7 @@
 " All indented stuff below is about Vim addon Manager installation and setup.
+" vint: -ProhibitSetNoCompatible
         set nocompatible | filetype indent plugin on | syn on
+" vint: +ProhibitSetNoCompatible
 
         fun! EnsureVamIsOnDisk(plugin_root_dir)
           " windows users may want to use http://mawercer.de/~marc/vam/index.php
@@ -10,13 +12,13 @@
           if isdirectory(vam_autoload_dir)
             return 1
           else
-            if 1 == confirm("Clone VAM into ".a:plugin_root_dir."?","&Y\n&N")
+            if 1 == confirm('Clone VAM into '.a:plugin_root_dir.'?',"&Y\n&N")
               " I'm sorry having to add this reminder. Eventually it'll pay off.
-              call confirm("Remind yourself that most plugins ship with ".
-                          \"documentation (README*, doc/*.txt). It is your ".
+              call confirm('Remind yourself that most plugins ship with '.
+                          \'documentation (README*, doc/*.txt). It is your '.
                           \"first source of knowledge. If you can't find ".
                           \"the info you're looking for in reasonable ".
-                          \"time ask maintainers to improve documentation")
+                          \'time ask maintainers to improve documentation')
               call mkdir(a:plugin_root_dir, 'p')
               execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '.
                           \       shellescape(a:plugin_root_dir, 1).'/vim-addon-manager'
@@ -45,7 +47,7 @@
           let g:vim_addon_manager = c
           let c.plugin_root_dir = expand('$HOME/.vim/vim-addons', 1)
           if !EnsureVamIsOnDisk(c.plugin_root_dir)
-            echohl ErrorMsg | echomsg "No VAM found!" | echohl NONE
+            echohl ErrorMsg | echomsg 'No VAM found!' | echohl NONE
             return
           endif
           let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
@@ -243,12 +245,29 @@ call vam#ActivateAddons(['github:kshenoy/vim-signature'], {'auto_install' : 0})
 call vam#ActivateAddons(['github:Chiel92/vim-autoformat'], {'auto_install' : 0})
 
 "Polyglot, many programming languages supported automatically
-call vam#ActivateAddons(['github:sheerun/vim-polyglot'], {'auto_install' : 0})
+call vam#ActivateAddons(['github:sheerun/vim-polyglot'], { 'auto_install' : 0})
 
 "Vim Git interface
-call vam#ActivateAddons(['github:tpope/vim-fugitive'], {'auto_install' : 0})
+call vam#ActivateAddons(['github:tpope/vim-fugitive'], { 'auto_install' : 0})
 
+"Changing stuff around something
+call vam#ActivateAddons(['github:tpope/vim-surround'], { 'auto_install' : 0})
 
+"Change code right in the quickfix window 
+call vam#ActivateAddons(['github:stefandtw/quickfix-reflector.vim'], { 'auto_install' : 0})
+
+" Highlight variables in Perl
+call vam#ActivateAddons(['github:pjcj/vim-hl-var'], { 'auto_install' : 0})
+" The variables will be highlighted after you have not performed any action
+" for a certain length of time. That time is controlled by the updatetime
+" setting.
+set updatetime=350
+" You can customise the highlighting applied by this plugin by using the
+" hlvarhl global variable. This can be set in your .vimrc file:
+" let g:hlvarhl="ctermbg=black ctermfg=red guifg=#ff0000 guibg=#000000 gui=bold"
+let g:hlvarhl="ctermfg=red guifg=#ff0000 guibg=#000000 gui=bold"
+" If you don't want the variable under cursor to be highlighted, you can disable it by setting variable g:hlvarcurrent to 1.
+" let g:hlvarcurrent = 1
 
 " Keep case when replacing
 call vam#ActivateAddons(['keepcase'], {'auto_install' : 0})
@@ -280,6 +299,9 @@ let g:syntastic_enable_signs=1
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
 
+
+
+
 "SYNTASTIC Vim checker
 call vam#ActivateAddons(['github:todesking/vint-syntastic'], {'auto_install' : 0})
 " you need: sudo pip install vim-vint
@@ -296,6 +318,11 @@ let g:syntastic_vim_checkers = ['vimlint','vint']
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = [ 'perl', 'perlcritic' ]
 let g:syntastic_perl_lib_path = [ './lib', './lib/auto', '/home/mikko/perl5/lib/perl5' ]
+
+" error threshold: policy violations with a severity above this value are highlighted as errors, the others are warnings (integer; default: 5)
+let g:syntastic_perl_perlcritic_thres = 1
+" command line options to pass to perlcritic  (string; default: empty)
+let g:syntastic_perl_perlcritic_args = '--brutal'
 
 "  Read file _vimrc_local.vim if present.
 call vam#ActivateAddons(['github:vim-scripts/local_vimrc.vim'], {'auto_install' : 0})
