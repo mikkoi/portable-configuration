@@ -22,7 +22,7 @@ source "${HOME}/portable-configuration/git-dir-colors.sh"
 export PROMPT_COMMAND='RET=$?;
    ERRMSG="";
    if [[ $RET != 0 ]]; then
-      ERRMSG="($RET)";
+      ERRMSG=" ($RET)";
    fi;
-   PS1="$GREEN\u@\h $BLUE\w $CYAN$(__git_ps1 "(%s)") $RED$ERRMSG \\\$${BLACK} "'
+   PS1="$GREEN\u@\h $BLUE\w$CYAN$(__git_ps1 " (%s)")$RED$ERRMSG \\\$${BLACK} "'
 
