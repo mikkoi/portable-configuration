@@ -242,13 +242,13 @@ call vam#ActivateAddons(['github:kshenoy/vim-signature'], {'auto_install' : 0})
 
 "Format your code with only one button press! This plugin makes use of
 "external formatprograms to achieve the best result.
-call vam#ActivateAddons(['github:Chiel92/vim-autoformat'], {'auto_install' : 0})
+" call vam#ActivateAddons(['github:Chiel92/vim-autoformat'], {'auto_install' : 0})
 
 "Polyglot, many programming languages supported automatically
 call vam#ActivateAddons(['github:sheerun/vim-polyglot'], { 'auto_install' : 0})
 
 "Vim Git interface
-call vam#ActivateAddons(['github:tpope/vim-fugitive'], { 'auto_install' : 0})
+" call vam#ActivateAddons(['github:tpope/vim-fugitive'], { 'auto_install' : 0})
 
 "Changing stuff around something
 call vam#ActivateAddons(['github:tpope/vim-surround'], { 'auto_install' : 0})
@@ -282,6 +282,22 @@ else
 	set t_Co=16
 	colorscheme solarized
 endif
+
+call vam#ActivateAddons(['github:SirVer/ultisnips'], {'auto_install' : 0})
+call vam#ActivateAddons(['github:honza/vim-snippets'], {'auto_install' : 0})
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<c-å>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+let g:UltiSnipsUsePythonVersion = 2
+
+
+
+
 
 "SYNTASTIC
 " call vam#ActivateAddons(['Syntastic'], {'force_loading_plugins_now': 1})
