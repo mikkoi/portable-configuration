@@ -1,3 +1,9 @@
+scriptencoding utf-8
+" set UTF-8 encoding
+set enc=utf-8
+set fenc=utf-8
+set termencoding=utf-8
+
 " All indented stuff below is about Vim addon Manager installation and setup.
 " vint: -ProhibitSetNoCompatible
         set nocompatible | filetype indent plugin on | syn on
@@ -79,6 +85,12 @@
         " See BUGS sections below [*]
         " Vim 7.0 users see BUGS section [3]
 
+" Sensible (common settings for Vim)
+" call vam#ActivateAddons(['github:tpope/vim-sensible'], {'auto_install' : 0})
+
+" Software capslock
+call vam#ActivateAddons(['github:tpope/vim-capslock'], {'auto_install' : 0})
+imap <C-L>     <Plug>CapsLockToggle
 
 
 " Read additional vimrc files.
@@ -114,10 +126,6 @@ set showmatch
 " " Author: Gerhard Gappmeier
 " "
 "  
-" set UTF-8 encoding
-set enc=utf-8
-set fenc=utf-8
-set termencoding=utf-8
 "  " disable vi compatibility (emulation of old bugs)
 "  set nocompatible
 "  " use indentation of previous line
@@ -219,6 +227,9 @@ inoremap <F3> <c-o>:w<cr>
 "https://code.google.com/p/lh-vim/wiki/BTW
 
 
+" Nerd Tree
+call vam#ActivateAddons(['github:scrooloose/nerdtree.git'], {'auto_install' : 0})
+
 " Nerd Commenter
 " call vam#ActivateAddons(['nerdcommenter'], {'auto_install' : 0})
 
@@ -283,13 +294,24 @@ else
 	colorscheme solarized
 endif
 
-call vam#ActivateAddons(['github:SirVer/ultisnips'], {'auto_install' : 0})
-call vam#ActivateAddons(['github:honza/vim-snippets'], {'auto_install' : 0})
+" call vam#ActivateAddons(['github:c9s/perlomni.vim'], {'auto_install' : 0})
+
+
+" https://github.com/Valloric/YouCompleteMe/issues/36#issuecomment-15451411
+" http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/18685821#18685821
+" call vam#ActivateAddons(['github:Valloric/YouCompleteMe'], {'auto_install' : 0})
+
+" call vam#ActivateAddons(['github:SirVer/ultisnips'], {'auto_install' : 0})
+" call vam#ActivateAddons(['github:honza/vim-snippets'], {'auto_install' : 0})
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsExpandTrigger="<c-å>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger="<c->"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger = '<c-l>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsListSnippets = '<c-m>'
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
