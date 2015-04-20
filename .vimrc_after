@@ -214,12 +214,6 @@ set showmatch
 " Save by F3 in insert mode.
 inoremap <F3> <c-o>:w<cr>
 
-"call vam#ActivateAddons(['YouCompleteMe'], {'auto_install' : 0})
-" let g:ycm_server_keep_logfiles = 1
-" let g:ycm_server_log_level = 'debug'
-" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-
-
 
 " LH-CPP ETC.
 "call vam#ActivateAddons(['lh-cpp'], {'auto_install' : 0})
@@ -257,6 +251,15 @@ call vam#ActivateAddons(['github:kshenoy/vim-signature'], {'auto_install' : 0})
 
 "Polyglot, many programming languages supported automatically
 call vam#ActivateAddons(['github:sheerun/vim-polyglot'], { 'auto_install' : 0})
+"Polyglot submodule prefs:
+"Highlighting of class scope if disabled by default. To enable set
+let g:cpp_class_scope_highlight = 1
+"Highlighting of template functions is enabled by setting
+"Note: C++ template syntax is notoriously difficult to parse, so don't expect this feature to be perfect.
+let g:cpp_experimental_template_highlight = 1
+
+
+
 
 "Vim Git interface
 " call vam#ActivateAddons(['github:tpope/vim-fugitive'], { 'auto_install' : 0})
@@ -276,7 +279,7 @@ set updatetime=350
 " You can customise the highlighting applied by this plugin by using the
 " hlvarhl global variable. This can be set in your .vimrc file:
 " let g:hlvarhl="ctermbg=black ctermfg=red guifg=#ff0000 guibg=#000000 gui=bold"
-let g:hlvarhl="ctermfg=red guifg=#ff0000 guibg=#000000 gui=bold"
+let g:hlvarhl='ctermfg=red guifg=#ff0000 guibg=#000000 gui=bold'
 " If you don't want the variable under cursor to be highlighted, you can disable it by setting variable g:hlvarcurrent to 1.
 " let g:hlvarcurrent = 1
 
@@ -300,6 +303,12 @@ endif
 " https://github.com/Valloric/YouCompleteMe/issues/36#issuecomment-15451411
 " http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/18685821#18685821
 " call vam#ActivateAddons(['github:Valloric/YouCompleteMe'], {'auto_install' : 0})
+"
+" let g:ycm_server_keep_logfiles = 1
+" let g:ycm_server_log_level = 'debug'
+" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+
+
 
 " call vam#ActivateAddons(['github:SirVer/ultisnips'], {'auto_install' : 0})
 " call vam#ActivateAddons(['github:honza/vim-snippets'], {'auto_install' : 0})
@@ -365,4 +374,8 @@ let g:syntastic_perl_perlcritic_args = '--brutal'
 "  Read file _vimrc_local.vim if present.
 call vam#ActivateAddons(['github:vim-scripts/local_vimrc.vim'], {'auto_install' : 0})
 " TODO Change local_vimrc.vim to e.g. github:embear/vim-localvimrc
+
+"  perl omnicompletion for vim (including base class function compleltions .. etc) 
+" call vam#ActivateAddons(['github:c9s/perlomni.vim'], {'auto_install' : 0})
+
 
