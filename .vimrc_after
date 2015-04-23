@@ -1,5 +1,5 @@
-scriptencoding utf-8
 set enc=utf-8
+scriptencoding utf-8
 set fenc=utf-8
 set termencoding=utf-8
 
@@ -261,7 +261,7 @@ let g:cpp_experimental_template_highlight = 1
 
 
 "Vim Git interface
-" call vam#ActivateAddons(['github:tpope/vim-fugitive'], { 'auto_install' : 0})
+call vam#ActivateAddons(['github:tpope/vim-fugitive'], { 'auto_install' : 0})
 
 "Changing stuff around something
 call vam#ActivateAddons(['github:tpope/vim-surround'], { 'auto_install' : 0})
@@ -319,9 +319,9 @@ endif
 let g:UltiSnipsExpandTrigger = '<c-l>'
 let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-let g:UltiSnipsListSnippets = '<c-m>'
+let g:UltiSnipsListSnippets = '<c-h>'
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit='vertical'
 
 let g:UltiSnipsUsePythonVersion = 2
 
