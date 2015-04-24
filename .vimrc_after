@@ -1,7 +1,11 @@
-set enc=utf-8
+set encoding=utf-8
 scriptencoding utf-8
-set fenc=utf-8
+set fileencoding=utf-8
 set termencoding=utf-8
+
+if debug_mikko
+   echom 'Entering ~/portable-configuration/.vimrc_after'
+endif
 
 " All indented stuff below is about Vim addon Manager installation and setup.
 " vint: -ProhibitSetNoCompatible
@@ -296,37 +300,6 @@ else
 	colorscheme solarized
 endif
 
-" call vam#ActivateAddons(['github:c9s/perlomni.vim'], {'auto_install' : 0})
-
-
-" https://github.com/Valloric/YouCompleteMe/issues/36#issuecomment-15451411
-" http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/18685821#18685821
-" call vam#ActivateAddons(['github:Valloric/YouCompleteMe'], {'auto_install' : 0})
-"
-" let g:ycm_server_keep_logfiles = 1
-" let g:ycm_server_log_level = 'debug'
-" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-
-
-
-" call vam#ActivateAddons(['github:SirVer/ultisnips'], {'auto_install' : 0})
-" call vam#ActivateAddons(['github:honza/vim-snippets'], {'auto_install' : 0})
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsExpandTrigger="<c->"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsExpandTrigger = '<c-l>'
-let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-let g:UltiSnipsListSnippets = '<c-h>'
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit='vertical'
-
-let g:UltiSnipsUsePythonVersion = 2
-
-
-
 
 
 "SYNTASTIC
@@ -370,11 +343,185 @@ let g:syntastic_perl_perlcritic_thres = 1
 " command line options to pass to perlcritic  (string; default: empty)
 let g:syntastic_perl_perlcritic_args = '--brutal'
 
+" Needed for local_vimrc
+" call vam#ActivateAddons(['github:LucHermitte/lh-vim-lib'], {'auto_install' : 0})
+
 "  Read file _vimrc_local.vim if present.
-call vam#ActivateAddons(['github:vim-scripts/local_vimrc.vim'], {'auto_install' : 0})
-" TODO Change local_vimrc.vim to e.g. github:embear/vim-localvimrc
+" call vam#ActivateAddons(['github:vim-scripts/local_vimrc.vim'], {'auto_install' : 0})
+" Newer version:
+" call vam#ActivateAddons(['github:LucHermitte/local_vimrc'], {'auto_install' : 0})
+ActivateAddons local_vimrc
+" TODO Change local_vimrc.vim to e.g. github:embear/vim-localvimrc ???
+
+" Remove $HOME from the asklist,
+" call filter(g:local_vimrc_options, 'v:val != $HOME')
+" call lh#path#munge(g:local_vimrc_options.whitelist, $HOME.'/emediate')
+" let g:local_vimrc_options = {'blacklist': ['/home/mikko/.vim/.*', '/home'], 'asklist': ['/home/mikko'], 'sandboxlist': [], 'whitelist': ['/home/mikko/.vim', '/home/mikko/emediate']}
 
 "  perl omnicompletion for vim (including base class function compleltions .. etc) 
 " call vam#ActivateAddons(['github:c9s/perlomni.vim'], {'auto_install' : 0})
 
+" echo 'End: ~/portable-configuration/.vimrc_after'
+
+
+set tabstop=3
+set expandtab
+set shiftwidth=3
+set autoindent
+set smartindent
+set cindent
+
+
+" call vam#ActivateAddons(['github:dagfinnr/perl-extract-method'], { 'auto_install' : 0})
+
+
+
+
+
+
+" ALL YOUCOMPLETEME STUFF HERE!
+
+" https://github.com/cwoac/nvim
+" http://notational.net/
+" if has('nvim')
+"     runtime! python_setup.vim
+" endif
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
+" Plug 'SirVer/ultisnips'
+" Plug 'ladislas/vim-snippets'
+
+
+call vam#ActivateAddons(['github:Valloric/YouCompleteMe'], { 'auto_install' : 0})
+
+" call vam#ActivateAddons(['github:rdnetto/YCM-Generator'], { 'auto_install' : 0})
+
+
+"
+"" YouCompleteMe options
+
+" E764: Option 'omnifunc' is not set
+" If this happens for Java files, you forgot to put this in your .vimrc: 
+" let g:EclimCompletionMethod = 'omnifunc'
+
+"
+"
+"let g:ycm_register_as_syntastic_checker = 1 "default 1
+"let g:Show_diagnostics_ui = 1 "default 1
+"
+"will put icons in Vim's gutter on lines that have a diagnostic set.
+"Turning this off will also turn off the YcmErrorLine and YcmWarningLine
+"highlighting
+" let g:ycm_enable_diagnostic_signs = 1
+" let g:ycm_enable_diagnostic_highlighting = 0
+" let g:ycm_always_populate_location_list = 1 "default 0
+" let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
+
+
+let g:ycm_complete_in_strings = 1 "default 1
+let g:ycm_collect_identifiers_from_tags_files = 0 "default 0
+let g:ycm_path_to_python_interpreter = '' "default ''
+
+
+let g:ycm_server_use_vim_stdout = 0 "default 0 (logging to console)
+let g:ycm_server_log_level = 'info' "default info
+
+"where to search for .ycm_extra_conf.py if not found
+" let g:ycm_global_ycm_extra_conf = '~/emediate/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+
+
+let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
+let g:ycm_filetype_whitelist = { '*': 1 }
+let g:ycm_key_invoke_completion = '<C-Space>'
+
+
+nnoremap <F11> :YcmForceCompileAndDiagnostics <CR>
+
+" Track the engine.
+call vam#ActivateAddons(['github:SirVer/ultisnips'], {'auto_install' : 0})
+" " Snippets are separated from the engine. Add this if you want them:
+call vam#ActivateAddons(['github:honza/vim-snippets'], {'auto_install' : 0})
+"
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsExpandTrigger='<c-å>'
+" let g:UltiSnipsJumpForwardTrigger='<c-b>'
+" let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+
+" " If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit='vertical'
+
+
+" Ladislav's setup:
+" YouCompleteMe setup
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_filetype_blacklist={'unite': 1}
+" let g:ycm_min_num_of_chars_for_completion = 1
+" nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"
+" " UltiSnips setup
+" let g:UltiSnipsExpandTrigger='<c-k>'
+" let g:UltiSnipsJumpForwardTrigger='<c-k>'
+" let g:UltiSnipsJumpBackwardTrigger='<c-s-k>'
+" let g:UltiSnipsSnippetsDir=plugDir.'/vim-snippets/UltiSnips'
+"
+
+" Another solution:
+" http://stackoverflow.com/questions/27390285/vim-ultisnips-not-working-with-ycm
+"  I solved this problem with the following configurations:
+"
+"  UltiSnips:
+"
+"  let g:UltiSnipsSnippetsDir        = $HOME.'/.vim/UltiSnips/'
+"  let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+"  let g:UltiSnipsExpandTrigger="<c-j>"
+"  let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"  let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"  let g:UltiSnipsListSnippets="<c-h>"
+"
+"  YCM:
+"
+"  let g:ycm_complete_in_comments = 1 
+"  let g:ycm_seed_identifiers_with_syntax = 1 
+"  let g:ycm_collect_identifiers_from_comments_and_strings = 1 
+
+" call vam#ActivateAddons(['github:c9s/perlomni.vim'], {'auto_install' : 0})
+
+
+" https://github.com/Valloric/YouCompleteMe/issues/36#issuecomment-15451411
+" http://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme/18685821#18685821
+" call vam#ActivateAddons(['github:Valloric/YouCompleteMe'], {'auto_install' : 0})
+"
+" let g:ycm_server_keep_logfiles = 1
+" let g:ycm_server_log_level = 'debug'
+" let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+
+
+
+" call vam#ActivateAddons(['github:SirVer/ultisnips'], {'auto_install' : 0})
+" call vam#ActivateAddons(['github:honza/vim-snippets'], {'auto_install' : 0})
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsExpandTrigger="<c->"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger = '<c-k>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+" let g:UltiSnipsJumpBackwardTrigger = '<c-j>'
+let g:UltiSnipsListSnippets = '<c-h>'
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit='vertical'
+
+let g:UltiSnipsUsePythonVersion = 2
+
+
+
+
+
+
+
+if debug_mikko
+   echom 'Exiting ~/portable-configuration/.vimrc_after'
+endif
 

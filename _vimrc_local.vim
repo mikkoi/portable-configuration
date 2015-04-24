@@ -1,3 +1,7 @@
+if debug_mikko
+   echom 'Entering ~/emediate/_vimrc_local.vim'
+endif
+
 augroup LOCAL_SETUP
 	 "using vim-addon-sql providing alias aware SQL completion for .sql files and PHP:
 	 "autocmd BufRead,BufNewFile *.sql,*.php call vim_addon_sql#Connect('mysql',{'database':'DATABASE', 'user':'USER', 'password' : 'PASSWORD'})
@@ -66,4 +70,8 @@ let g:syntastic_c_compiler = 'gcc'
 let g:syntastic_cpp_compiler = 'g++'
 
 let g:syntastic_cpp_cppcheck_exec = 'cppcheck'
+
+if debug_mikko
+   echom 'Exiting ~/emediate/_vimrc_local.vim'
+endif
 
