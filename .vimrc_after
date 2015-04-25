@@ -343,15 +343,24 @@ let g:syntastic_perl_perlcritic_thres = 1
 " command line options to pass to perlcritic  (string; default: empty)
 let g:syntastic_perl_perlcritic_args = '--brutal'
 
+
+
+" Doesn't work:
+" call vam#ActivateAddons(['github:MarcWeber/vim-addon-local-vimrc'])
+" let g:local_vimrc = { 'names':['.vimrc', '_vimrc_local.vim'],'hash_fun': ['LVRHashOfFile'] }
+" let g:local_vimrc = { 'names':['_vimrc_local.vim'],'hash_fun': ['LVRHashOfFile'] }
+" let g:local_vimrc = {'cache_file': '/home/mikko/.vim_local_rc_cache', 'hash_fun': 'LVRHashOfFile', 'implementations': ['sha512sum', 'sha256sum', 'sha1sum', 'md5sum', 'viml'], 'names': ['.vimrc'], 'resource_on_cwd_change': 1}
+
+
 " Needed for local_vimrc
-" call vam#ActivateAddons(['github:LucHermitte/lh-vim-lib'], {'auto_install' : 0})
+call vam#ActivateAddons(['github:LucHermitte/lh-vim-lib'], {'auto_install' : 0})
 
 "  Read file _vimrc_local.vim if present.
 " call vam#ActivateAddons(['github:vim-scripts/local_vimrc.vim'], {'auto_install' : 0})
 " Newer version:
-" call vam#ActivateAddons(['github:LucHermitte/local_vimrc'], {'auto_install' : 0})
+call vam#ActivateAddons(['github:LucHermitte/local_vimrc'], {'auto_install' : 0})
 ActivateAddons local_vimrc
-" TODO Change local_vimrc.vim to e.g. github:embear/vim-localvimrc ???
+" TODO Change local_vimrc.vim to e.g. https://github.com/embear/vim-localvimrc ???
 
 " Remove $HOME from the asklist,
 " call filter(g:local_vimrc_options, 'v:val != $HOME')
