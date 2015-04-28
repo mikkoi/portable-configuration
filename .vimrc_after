@@ -127,8 +127,8 @@ command -range=% -nargs=* PerlTidy <line1>,<line2>!perltidy
 
 "run :Tidy on entire buffer and return cursor to (approximate) original position"
 fun Tidy()
-    let l = line(".")
-    let c = col(".")
+    let l = line('.')
+    let c = col('.')
     :PerlTidy
     call cursor(l, c)
 endfun
@@ -240,6 +240,16 @@ call vam#ActivateAddons(['github:scrooloose/nerdtree.git'], {'auto_install' : 0}
 
 " Nerd Commenter
 " call vam#ActivateAddons(['nerdcommenter'], {'auto_install' : 0})
+
+
+
+" " Needed for easytags-vim
+" call vam#ActivateAddons(['github:xolox/vim-misc'], {'auto_install' : 0})
+" Easytags
+call vam#ActivateAddons(['github:xolox/vim-easytags'], {'auto_install' : 0})
+
+
+
 
 " TComment
 call vam#ActivateAddons(['github:tomtom/tcomment_vim'], {'auto_install' : 0})
