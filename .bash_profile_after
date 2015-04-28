@@ -13,19 +13,19 @@ echo "Entering portable-configuration/.bash_profile_after"
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "${HOME}/bin" ]; then
-    export PATH="${HOME}/bin${PATH:+:}${PATH}"
+    PATH="${HOME}/bin${PATH:+:}${PATH}"
 fi
 # do the same with MANPATH and LD_LIBRARY_PATH
 if [ -d "${HOME}/man" ]; then
-    export MANPATH="${HOME}/man${MANPATH:+:}${MANPATH}"
+    MANPATH="${HOME}/man${MANPATH:+:}${MANPATH}"
 fi
 if [ -d "${HOME}/lib" ]; then
-    export LD_LIBRARY_PATH="${HOME}/lib${LD_LIBRARY_PATH:+:}${LD_LIBRARY_PATH}"
+    LD_LIBRARY_PATH="${HOME}/lib${LD_LIBRARY_PATH:+:}${LD_LIBRARY_PATH}"
 fi
 
 # Other local bins
 if [ -d ~/.cabal/bin ]; then # Cabal:Haskell's package manager. e.g. Shellcheck!
-    export PATH="${HOME}/.cabal/bin${PATH:+:}${PATH}"
+    PATH="${HOME}/.cabal/bin${PATH:+:}${PATH}"
 fi
 
 # Set ssh-agent

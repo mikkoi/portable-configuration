@@ -122,6 +122,17 @@ set showmatch
 "set foldlevelstart=20 
 "Maybe with VimFold4C
 
+"define :Tidy command to run perltidy on visual selection || entire buffer"
+command -range=% -nargs=* PerlTidy <line1>,<line2>!perltidy
+
+"run :Tidy on entire buffer and return cursor to (approximate) original position"
+fun Tidy()
+    let l = line(".")
+    let c = col(".")
+    :PerlTidy
+    call cursor(l, c)
+endfun
+
 
 " VIM Configuration File
 " " Description: Optimized for C/C++ development, but useful also for other
@@ -341,7 +352,7 @@ let g:syntastic_perl_lib_path = [ './lib', './lib/auto', '/home/mikko/perl5/lib/
 " error threshold: policy violations with a severity above this value are highlighted as errors, the others are warnings (integer; default: 5)
 let g:syntastic_perl_perlcritic_thres = 1
 " command line options to pass to perlcritic  (string; default: empty)
-let g:syntastic_perl_perlcritic_args = '--brutal'
+let g:syntastic_perl_perlcritic_args = '--brutal --exclude Modules::RequireVersionVar --exclude CodeLayout::RequireTidyCode'
 
 
 
