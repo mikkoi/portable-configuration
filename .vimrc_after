@@ -101,6 +101,9 @@ set exrc
 " Be more secure when doing int.
 set secure
 
+" No more entering ex mode by accident ('Q')
+nnoremap Q <nop>
+
 syntax on
 set number
 
@@ -132,6 +135,12 @@ fun Tidy()
     :PerlTidy
     call cursor(l, c)
 endfun
+
+" PerlDoc command:
+call vam#ActivateAddons(['github:hotchpotch/perldoc-vim'], {'auto_install' : 0})
+
+
+
 
 
 " VIM Configuration File
@@ -260,8 +269,10 @@ call vam#ActivateAddons(['github:tomtom/tcomment_vim'], {'auto_install' : 0})
 "Another CMake with file list bar
 " call vam#ActivateAddons(['vim-cmake-project'], {'auto_install' : 0})
 
-"Rename a file in the current directory
-call vam#ActivateAddons(['Rename2'], {'auto_install' : 0})
+" "Rename a file in the current directory
+" call vam#ActivateAddons(['Rename2'], {'auto_install' : 0})
+"Another plugin to do the same, better perhaps.
+call vam#ActivateAddons(['github:danro/rename.vim'], {'auto_install' : 0})
 
 "Save a file and create its parent directories at the same time
 call vam#ActivateAddons(['github:duggiefresh/vim-easydir'], {'auto_install' : 0})
