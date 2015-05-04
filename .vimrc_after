@@ -373,7 +373,7 @@ let g:syntastic_perl_lib_path = [ './lib', './lib/auto', '/home/mikko/perl5/lib/
 " error threshold: policy violations with a severity above this value are highlighted as errors, the others are warnings (integer; default: 5)
 let g:syntastic_perl_perlcritic_thres = 1
 " command line options to pass to perlcritic  (string; default: empty)
-let g:syntastic_perl_perlcritic_args = '--brutal --exclude Modules::RequireVersionVar --exclude CodeLayout::RequireTidyCode'
+let g:syntastic_perl_perlcritic_args = '--brutal --exclude Modules::RequireVersionVar'
 
 
 
