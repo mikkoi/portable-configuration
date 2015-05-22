@@ -244,6 +244,9 @@ inoremap <F3> <c-o>:w<cr>
 "https://code.google.com/p/lh-vim/wiki/BTW
 
 
+" Raml syntax
+call vam#ActivateAddons(['github:kennethzfeng/vim-raml'], {'auto_install' : 0})
+
 " Nerd Tree
 call vam#ActivateAddons(['github:scrooloose/nerdtree.git'], {'auto_install' : 0})
 
