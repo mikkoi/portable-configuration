@@ -1,2 +1,2 @@
 [include]
-    path = "portable-configuration/.gitconfig"
+    path = ~/portable-configuration/.gitconfig
