@@ -11,4 +11,4 @@
     re = remote --verbose --verbose
     type = cat-file -t
     dump = cat-file -p
-    last = log -1
+    last = log -n1 --format=raw
