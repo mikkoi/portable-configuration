@@ -7,7 +7,8 @@
     co = checkout
     st = status
     br = branch --all --verbose --verbose
-    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    pum = push --tags origin master
+    hist = log --pretty=format:'%h %ad | %s%d [%an% G?]' --graph --date=short
     re = remote --verbose --verbose
     type = cat-file -t
     dump = cat-file -p
