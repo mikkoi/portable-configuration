@@ -12,4 +12,4 @@
     re = remote --verbose --verbose
     type = cat-file -t
     dump = cat-file -p
-    last = log -n1 --format=raw
+    last = log -n1 --show-signature
