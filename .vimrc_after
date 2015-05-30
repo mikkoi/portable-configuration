@@ -139,6 +139,9 @@ endfun
 " PerlDoc command:
 call vam#ActivateAddons(['github:hotchpotch/perldoc-vim'], {'auto_install' : 0})
 
+" Raml:
+call vam#ActivateAddons(['github:kennethzfeng/vim-raml'], {'auto_install' : 0})
+
 
 
 
