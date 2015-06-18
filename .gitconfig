@@ -14,3 +14,4 @@
     type = cat-file -t
     dump = cat-file -p
     last = log -n1 --show-signature
+    stashed = stash list --pretty=format:'%gd: %Cred%h%Creset %Cgreen[%ar]%Creset %s'
