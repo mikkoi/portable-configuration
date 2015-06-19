@@ -567,8 +567,8 @@ let g:UltiSnipsUsePythonVersion = 2
 
 
 
-nmap - ddp
-nmap _ dd<up>P
+nnoremap - ddp
+nnoremap _ dd<up>P
 
 if debug_mikko
    echom 'Exiting ~/portable-configuration/.vimrc_after'
