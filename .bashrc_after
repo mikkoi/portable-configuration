@@ -123,7 +123,7 @@ fi
 if [ -f "${HOME}/other/github/dircolors-solarized/dircolors.ansi-light" ]; then
    eval "$(dircolors "${HOME}/other/github/dircolors-solarized/dircolors.ansi-light")"
 else
-  mkdir -p "${HOME}/other/github"
+  #mkdir -p "${HOME}/other/github"
   git clone https://github.com/seebi/dircolors-solarized "${HOME}/other/github/dircolors-solarized"
   eval "$(dircolors "${HOME}/other/github/dircolors-solarized/dircolors.ansi-light")"
 fi
@@ -143,7 +143,7 @@ export PATH="$HOME/.anyenv/bin:$PATH" && eval "$(anyenv init -)"
 (command -v plenv >/dev/null 2>&1 ) || { anyenv install plenv; }
 (test -r "${HOME}/.anyenv/envs/plenv/plugins/plenv-contrib/" ) || { git clone git://github.com/miyagawa/plenv-contrib.git "${HOME}/.anyenv/envs/plenv/plugins/plenv-contrib/"; }
 
-(command -v vimcat >/dev/null 2>&1 ) || { cd "${HOME}/other/github/vimpager"; git clone https://github.com/rkitover/vimpager.git; cd vimpager; make PREFIX="${HOME}" install; }
+(command -v vimcat >/dev/null 2>&1 ) || { cd "${HOME}/other/github"; git clone https://github.com/rkitover/vimpager.git; cd vimpager; make PREFIX="${HOME}" install; }
 
 (command -v curl >/dev/null 2>&1 ) || { echo >&2 "Please install curl."; }
 
