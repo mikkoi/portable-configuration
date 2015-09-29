@@ -136,6 +136,9 @@ fun Tidy()
     call cursor(l, c)
 endfun
 
+" Lean & mean status/tabline for vim that's light as air.
+call vam#ActivateAddons([ 'vim-airline' ])
+
 " PerlDoc command:
 call vam#ActivateAddons(['github:hotchpotch/perldoc-vim'], {'auto_install' : 0})
 
