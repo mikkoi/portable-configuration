@@ -13,5 +13,6 @@
     re = remote --verbose --verbose
     type = cat-file -t
     dump = cat-file -p
-    last = log -n1 --show-signature
+    last = log -n1 --show-signature --
     stashed = stash list --pretty=format:'%gd: %Cred%h%Creset %Cgreen[%ar]%Creset %s'
+    diffcommit = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
