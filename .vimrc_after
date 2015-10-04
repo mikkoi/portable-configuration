@@ -264,7 +264,7 @@ call vam#ActivateAddons(['github:scrooloose/nerdtree.git'], {'auto_install' : 0}
 " " Needed for easytags-vim
 " call vam#ActivateAddons(['github:xolox/vim-misc'], {'auto_install' : 0})
 " Easytags
-call vam#ActivateAddons(['github:xolox/vim-easytags'], {'auto_install' : 0})
+" call vam#ActivateAddons(['github:xolox/vim-easytags'], {'auto_install' : 0})
 
 
 
