@@ -137,7 +137,9 @@ fun Tidy()
 endfun
 
 " Lean & mean status/tabline for vim that's light as air.
+" let g:airline_section_z = %3p%% %{g:airline_symbols.linenr}%#__accent_bold#%4l%#__restore__#:%3v
 call vam#ActivateAddons([ 'vim-airline' ])
+let g:airline_section_z = '%p%% : %v'
 
 " PerlDoc command:
 call vam#ActivateAddons(['github:hotchpotch/perldoc-vim'], {'auto_install' : 0})
@@ -442,7 +444,7 @@ set cindent
 " Plug 'ladislas/vim-snippets'
 
 
-call vam#ActivateAddons(['github:Valloric/YouCompleteMe'], { 'auto_install' : 0})
+" call vam#ActivateAddons(['github:Valloric/YouCompleteMe'], { 'auto_install' : 0})
 
 " call vam#ActivateAddons(['github:rdnetto/YCM-Generator'], { 'auto_install' : 0})
 
@@ -488,10 +490,10 @@ let g:ycm_key_invoke_completion = '<C-Space>'
 
 nnoremap <F11> :YcmForceCompileAndDiagnostics <CR>
 
-" Track the engine.
-call vam#ActivateAddons(['github:SirVer/ultisnips'], {'auto_install' : 0})
-" " Snippets are separated from the engine. Add this if you want them:
-call vam#ActivateAddons(['github:honza/vim-snippets'], {'auto_install' : 0})
+" " Track the engine.
+" call vam#ActivateAddons(['github:SirVer/ultisnips'], {'auto_install' : 0})
+" " " Snippets are separated from the engine. Add this if you want them:
+" call vam#ActivateAddons(['github:honza/vim-snippets'], {'auto_install' : 0})
 "
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
