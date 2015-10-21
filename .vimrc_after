@@ -444,7 +444,7 @@ set cindent
 " Plug 'ladislas/vim-snippets'
 
 
-" call vam#ActivateAddons(['github:Valloric/YouCompleteMe'], { 'auto_install' : 0})
+call vam#ActivateAddons(['github:Valloric/YouCompleteMe'], { 'auto_install' : 0})
 
 " call vam#ActivateAddons(['github:rdnetto/YCM-Generator'], { 'auto_install' : 0})
 
@@ -471,7 +471,7 @@ set cindent
 
 
 let g:ycm_complete_in_strings = 1 "default 1
-let g:ycm_collect_identifiers_from_tags_files = 0 "default 0
+let g:ycm_collect_identifiers_from_tags_files = 1 "default 0
 let g:ycm_path_to_python_interpreter = '' "default ''
 
 
@@ -570,6 +570,7 @@ let g:UltiSnipsUsePythonVersion = 2
 
 
 
+call vam#ActivateAddons(['github:majutsushi/tagbar'], { 'auto_install' : 0})
 
 
 nnoremap - ddp

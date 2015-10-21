@@ -16,4 +16,5 @@
     last = log -n1 --show-signature --
     stashed = stash list --pretty=format:'%gd: %Cred%h%Creset %Cgreen[%ar]%Creset %s'
     diffcommit = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-    reviewboard-diff = iff --no-color --full-index --ignore-submodules -M --no-ext-diff
+    reviewboard-diff = diff --no-color --full-index --ignore-submodules -M --no-ext-diff
+    ctags = !${HOME}/portable-configuration/git-update-ctags.sh
