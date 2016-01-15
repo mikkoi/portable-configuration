@@ -29,7 +29,7 @@ if [ -d ~/.cabal/bin ]; then # Cabal:Haskell's package manager. e.g. Shellcheck!
 fi
 
 # Set ssh-agent
-eval "$(/usr/bin/keychain --eval id_rsa)"
+eval "$(keychain --eval id_rsa)"
 if ! xset q &>/dev/null; then
    ssh-add
 fi
